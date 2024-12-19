@@ -1,0 +1,1785 @@
+{
+  "compatibilityLevel": 1567,
+  "model": {
+    "annotations": [
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"d_Vendedores\",\"d_Produtos\",\"f_Itens_Pedidos\",\"Parâmetro1\",\"Transformar o Arquivo de Exemplo\",\"Arquivo de Amostra\",\"Transformar Arquivo\",\"f_Pedidos\",\"Parâmetro2\",\"Transformar o Arquivo de Exemplo (2)\",\"Arquivo de Amostra (2)\",\"Transformar Arquivo (2)\",\"d_Clientes\",\"d_Estados\",\"d_Formas de Pagamento\",\"d_Lojas\",\"_Medidas\"]"
+      },
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "1"
+      },
+      {
+        "name": "PBIDesktopVersion",
+        "value": "2.138.1452.0 (24.11)"
+      },
+      {
+        "name": "PBI_ProTooling",
+        "value": "[\"DevMode\"]"
+      }
+    ],
+    "culture": "pt-BR",
+    "cultures": [
+      {
+        "name": "pt-BR",
+        "linguisticMetadata": {
+          "content": {
+            "Language": "en-US",
+            "Version": "1.0.0"
+          },
+          "contentType": "json"
+        }
+      }
+    ],
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "expressions": [
+      {
+        "name": "Transformar o Arquivo de Exemplo",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Fonte = Excel.Workbook(Parâmetro1, null, true),",
+          "    #\"Itens Pedido_Sheet\" = Fonte{[Item=\"Itens Pedido\",Kind=\"Sheet\"]}[Data],",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(#\"Itens Pedido_Sheet\", [PromoteAllScalars=true])",
+          "in",
+          "    #\"Cabeçalhos Promovidos\""
+        ],
+        "kind": "m",
+        "lineageTag": "3b10526e-770a-4299-9921-c9453908dac3",
+        "queryGroup": "Transformar Arquivo de Vendas"
+      },
+      {
+        "name": "Parâmetro1",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Binary"
+          }
+        ],
+        "expression": "#\"Arquivo de Amostra\" meta [IsParameterQuery=true, BinaryIdentifier=#\"Arquivo de Amostra\", Type=\"Binary\", IsParameterQueryRequired=true]",
+        "kind": "m",
+        "lineageTag": "b671c20d-1fb5-4c6d-b35a-a5f923740c7b",
+        "queryGroup": "Transformar Arquivo de Vendas\\Consultas Auxiliares"
+      },
+      {
+        "name": "Arquivo de Amostra",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Binary"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Fonte = Folder.Files(\"D:\\Github projetos\\Power Bi Aula Ka Solution\\Dados\\Vendas\"),",
+          "    #\"D:\\Github projetos\\Power Bi Aula Ka Solution\\Dados\\Vendas\\_Layout xlsx1\" = Fonte{[#\"Folder Path\"=\"D:\\Github projetos\\Power Bi Aula Ka Solution\\Dados\\Vendas\\\",Name=\"Layout.xlsx\"]}[Content]",
+          "in",
+          "    #\"D:\\Github projetos\\Power Bi Aula Ka Solution\\Dados\\Vendas\\_Layout xlsx1\""
+        ],
+        "kind": "m",
+        "lineageTag": "ec6703be-55d2-4968-8dba-b2d16f735e5f",
+        "queryGroup": "Transformar Arquivo de Vendas\\Consultas Auxiliares"
+      },
+      {
+        "name": "Transformar Arquivo",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Function"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Fonte = (Parâmetro1 as binary) => let",
+          "    Fonte = Excel.Workbook(Parâmetro1, null, true),",
+          "    #\"Itens Pedido_Sheet\" = Fonte{[Item=\"Itens Pedido\",Kind=\"Sheet\"]}[Data],",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(#\"Itens Pedido_Sheet\", [PromoteAllScalars=true])",
+          "in",
+          "    #\"Cabeçalhos Promovidos\"",
+          "in",
+          "    Fonte"
+        ],
+        "kind": "m",
+        "lineageTag": "45013058-cd40-4e3e-8238-3bfa311e9ac4",
+        "mAttributes": "[ FunctionQueryBinding = \"{\"\"exemplarFormulaName\"\":\"\"Transformar o Arquivo de Exemplo\"\"}\" ]",
+        "queryGroup": "Transformar Arquivo de Vendas\\Consultas Auxiliares"
+      },
+      {
+        "name": "Transformar o Arquivo de Exemplo (2)",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Fonte = Excel.Workbook(Parâmetro2, null, true),",
+          "    Pedido_Sheet = Fonte{[Item=\"Pedido\",Kind=\"Sheet\"]}[Data],",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Pedido_Sheet, [PromoteAllScalars=true])",
+          "in",
+          "    #\"Cabeçalhos Promovidos\""
+        ],
+        "kind": "m",
+        "lineageTag": "139691c8-dd47-456a-8295-f112e779c08d",
+        "queryGroup": "Transformar Arquivo de Vendas (2)"
+      },
+      {
+        "name": "Parâmetro2",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Binary"
+          }
+        ],
+        "expression": "#\"Arquivo de Amostra (2)\" meta [IsParameterQuery=true, BinaryIdentifier=#\"Arquivo de Amostra (2)\", Type=\"Binary\", IsParameterQueryRequired=true]",
+        "kind": "m",
+        "lineageTag": "ec5dcd49-ab7e-4042-a649-1cabced9c420",
+        "queryGroup": "Transformar Arquivo de Vendas (2)\\Consultas Auxiliares"
+      },
+      {
+        "name": "Arquivo de Amostra (2)",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Binary"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Fonte = Folder.Files(\"D:\\Github projetos\\Power Bi Aula Ka Solution\\Dados\\Vendas\"),",
+          "    #\"D:\\Github projetos\\Power Bi Aula Ka Solution\\Dados\\Vendas\\_Layout xlsx1\" = Fonte{[#\"Folder Path\"=\"D:\\Github projetos\\Power Bi Aula Ka Solution\\Dados\\Vendas\\\",Name=\"Layout.xlsx\"]}[Content]",
+          "in",
+          "    #\"D:\\Github projetos\\Power Bi Aula Ka Solution\\Dados\\Vendas\\_Layout xlsx1\""
+        ],
+        "kind": "m",
+        "lineageTag": "95947139-54fc-4e89-81e9-b54cfb86d248",
+        "queryGroup": "Transformar Arquivo de Vendas (2)\\Consultas Auxiliares"
+      },
+      {
+        "name": "Transformar Arquivo (2)",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Function"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Fonte = (Parâmetro2 as binary) => let",
+          "    Fonte = Excel.Workbook(Parâmetro2, null, true),",
+          "    Pedido_Sheet = Fonte{[Item=\"Pedido\",Kind=\"Sheet\"]}[Data],",
+          "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Pedido_Sheet, [PromoteAllScalars=true])",
+          "in",
+          "    #\"Cabeçalhos Promovidos\"",
+          "in",
+          "    Fonte"
+        ],
+        "kind": "m",
+        "lineageTag": "6089bbb8-cdc6-4162-bf27-91dd920695d7",
+        "mAttributes": "[ FunctionQueryBinding = \"{\"\"exemplarFormulaName\"\":\"\"Transformar o Arquivo de Exemplo (2)\"\"}\" ]",
+        "queryGroup": "Transformar Arquivo de Vendas (2)\\Consultas Auxiliares"
+      }
+    ],
+    "queryGroups": [
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "0"
+          }
+        ],
+        "folder": "Transformar Arquivo de Vendas"
+      },
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "0"
+          }
+        ],
+        "folder": "Transformar Arquivo de Vendas\\Consultas Auxiliares"
+      },
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "2"
+          }
+        ],
+        "folder": "Transformar Arquivo de Vendas (2)"
+      },
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "0"
+          }
+        ],
+        "folder": "Transformar Arquivo de Vendas (2)\\Consultas Auxiliares"
+      }
+    ],
+    "relationships": [
+      {
+        "name": "1c72025e-073f-4bbf-84f1-bdc51e5f4f58",
+        "fromColumn": "Data Nascimento",
+        "fromTable": "d_Clientes",
+        "joinOnDateBehavior": "datePartOnly",
+        "toColumn": "Date",
+        "toTable": "LocalDateTable_bae51644-78ce-48f6-b705-9247f6ca9c14"
+      },
+      {
+        "name": "253693b5-d51f-05f1-e3ce-7888b800e28c",
+        "fromColumn": "Forma de Pagto",
+        "fromTable": "f_Pedidos",
+        "toColumn": "Código",
+        "toTable": "d_Formas de Pagamento"
+      },
+      {
+        "name": "2eda8c6b-ef21-9101-1251-28cf8a6457b4",
+        "fromColumn": "UF",
+        "fromTable": "f_Pedidos",
+        "toColumn": "Código",
+        "toTable": "d_Estados"
+      },
+      {
+        "name": "4318195d-1c32-e4be-498e-7f54c7336f9f",
+        "fromColumn": "Vendedor",
+        "fromTable": "f_Pedidos",
+        "toColumn": "Código",
+        "toTable": "d_Vendedores"
+      },
+      {
+        "name": "6758268b-89d2-d4a6-e915-280eff841a88",
+        "fromColumn": "Pedido",
+        "fromTable": "f_Itens_Pedidos",
+        "toColumn": "Pedido",
+        "toTable": "f_Pedidos"
+      },
+      {
+        "name": "c36a3592-c742-b333-cdaa-af60a8f6f2d0",
+        "fromColumn": "Produto",
+        "fromTable": "f_Itens_Pedidos",
+        "toColumn": "Código",
+        "toTable": "d_Produtos"
+      },
+      {
+        "name": "2f5e770d-54f2-d2ca-3e26-991e89a697ab",
+        "crossFilteringBehavior": "bothDirections",
+        "fromCardinality": "one",
+        "fromColumn": "Pedido",
+        "fromTable": "f_Pedidos",
+        "toColumn": "Código",
+        "toTable": "d_Lojas"
+      },
+      {
+        "name": "9943e9c1-3fb1-a254-e31e-c8b940be91ac",
+        "fromColumn": "Cliente",
+        "fromTable": "f_Pedidos",
+        "toColumn": "Código",
+        "toTable": "d_Clientes"
+      },
+      {
+        "name": "4544cf22-62f2-4a10-9126-c802c41e4d1a",
+        "fromColumn": "Date",
+        "fromTable": "d_calendario",
+        "joinOnDateBehavior": "datePartOnly",
+        "toColumn": "Date",
+        "toTable": "LocalDateTable_6a8ecd74-b451-4e87-9e72-a1982da4a28f"
+      },
+      {
+        "name": "eec8c8a4-a2c2-9aa9-9108-a547734b8c59",
+        "fromColumn": "Data Venda",
+        "fromTable": "f_Pedidos",
+        "toColumn": "Date",
+        "toTable": "d_calendario"
+      }
+    ],
+    "sourceQueryCulture": "pt-BR",
+    "tables": [
+      {
+        "name": "d_Vendedores",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navegação"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Código",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "a6ac5611-7b01-4de0-b6da-4f07804f2e0d",
+            "sourceColumn": "Código",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Foto",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataCategory": "ImageUrl",
+            "dataType": "string",
+            "lineageTag": "68931bd3-2806-4d6f-a69d-a0b1bdaf7973",
+            "sourceColumn": "Foto",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Vendedor",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "bee769c7-d907-4ada-a256-f3b2a0252906",
+            "sourceColumn": "Vendedor",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Cod. Loja",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "2789fbbb-af8c-4a08-b9e9-e8bbbb0fcbe0",
+            "sourceColumn": "Cod. Loja",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "cff213e8-8623-43ec-918e-fce3ba1748fc",
+        "partitions": [
+          {
+            "name": "d_Vendedores",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Fonte = Csv.Document(File.Contents(\"D:\\Github projetos\\Power Bi Aula Ka Solution\\Dados\\_Vendedores.txt\"),[Delimiter=\"\t\", Columns=3, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),",
+                "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"Código\", Int64.Type}, {\"Vendedor_Loja\", type text}, {\"Foto\", type text}}),",
+                "    #\"Dividir Coluna por Delimitador\" = Table.SplitColumn(#\"Tipo Alterado\", \"Vendedor_Loja\", Splitter.SplitTextByDelimiter(\"_\", QuoteStyle.Csv), {\"Vendedor_Loja.1\", \"Vendedor_Loja.2\"}),",
+                "    #\"Tipo Alterado1\" = Table.TransformColumnTypes(#\"Dividir Coluna por Delimitador\",{{\"Vendedor_Loja.1\", type text}, {\"Vendedor_Loja.2\", Int64.Type}}),",
+                "    #\"Colocar Cada Palavra Em Maiúscula\" = Table.TransformColumns(#\"Tipo Alterado1\",{{\"Vendedor_Loja.1\", Text.Proper, type text}}),",
+                "    #\"Colunas Renomeadas\" = Table.RenameColumns(#\"Colocar Cada Palavra Em Maiúscula\",{{\"Vendedor_Loja.1\", \"Vendedor\"}, {\"Vendedor_Loja.2\", \"Cod. Loja\"}})",
+                "in",
+                "    #\"Colunas Renomeadas\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "d_Produtos",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navegação"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Código",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "3ce5ede5-bb78-4d7c-b2e0-9ad6dfb130d4",
+            "sourceColumn": "Código",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Produto",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "42ed8c5b-107b-41c2-8d8e-ad08d4d85d44",
+            "sourceColumn": "Produto",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Preço base",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "ea2d4f43-07eb-48b9-9073-784372812208",
+            "sourceColumn": "Preço base",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Imagem",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataCategory": "ImageUrl",
+            "dataType": "string",
+            "lineageTag": "cd2e9c50-d10f-462c-aee1-add5906e6c5e",
+            "sourceColumn": "Imagem",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "195e830d-7e27-40e7-b5dd-28492e59cb64",
+        "partitions": [
+          {
+            "name": "d_Produtos",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Fonte = Csv.Document(File.Contents(\"D:\\Github projetos\\Power Bi Aula Ka Solution\\Dados\\_Produtos.csv\"),[Delimiter=\";\", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),",
+                "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"Código\", Int64.Type}, {\"Produto\", type text}, {\"Preço base\", Int64.Type}, {\"Imagem\", type text}})",
+                "in",
+                "    #\"Tipo Alterado\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "f_Itens_Pedidos",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navegação"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Nome da Origem",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "922ba81d-82dc-4d6b-8f11-aab81f1d6097",
+            "sourceColumn": "Nome da Origem",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Pedido",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "e995a4e0-c42d-42a0-b56f-612eb05b5eb0",
+            "sourceColumn": "Pedido",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Produto",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "a07f6939-8747-4c23-bfc7-c0d850ff116a",
+            "sourceColumn": "Produto",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Preço Venda",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "double",
+            "formatString": "#,0.00",
+            "lineageTag": "ff505cee-1b92-4ba9-a79b-174fd66ab680",
+            "sourceColumn": "Preço Venda",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Qtde.",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "af4d6bf8-22b4-4814-86d0-9e222cb98583",
+            "sourceColumn": "Qtde.",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "fcc87714-f789-4f03-9051-3d3001bcf78c",
+        "partitions": [
+          {
+            "name": "f_Itens_Pedidos",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Fonte = Folder.Files(\"D:\\Github projetos\\Power Bi Aula Ka Solution\\Dados\\Vendas\"),",
+                "    #\"Arquivos Ocultos Filtrados1\" = Table.SelectRows(Fonte, each [Attributes]?[Hidden]? <> true),",
+                "    #\"Invocar Função Personalizada1\" = Table.AddColumn(#\"Arquivos Ocultos Filtrados1\", \"Transformar Arquivo\", each #\"Transformar Arquivo\"([Content])),",
+                "    #\"Colunas Renomeadas1\" = Table.RenameColumns(#\"Invocar Função Personalizada1\", {\"Name\", \"Nome da Origem\"}),",
+                "    #\"Outras Colunas Removidas1\" = Table.SelectColumns(#\"Colunas Renomeadas1\", {\"Nome da Origem\", \"Transformar Arquivo\"}),",
+                "    #\"Coluna de Tabela Expandida1\" = Table.ExpandTableColumn(#\"Outras Colunas Removidas1\", \"Transformar Arquivo\", Table.ColumnNames(#\"Transformar Arquivo\"(#\"Arquivo de Amostra\"))),",
+                "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Coluna de Tabela Expandida1\",{{\"Nome da Origem\", type text}, {\"Pedido\", Int64.Type}, {\"Produto\", Int64.Type}, {\"Preço Venda\", type number}, {\"Qtde.\", Int64.Type}}),",
+                "    #\"Linhas Filtradas\" = Table.SelectRows(#\"Tipo Alterado\", each ([Nome da Origem] <> \"Layout.xlsx\"))",
+                "in",
+                "    #\"Linhas Filtradas\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "f_Pedidos",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navegação"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Nome da Origem",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "f13d0169-c9cd-4c8e-aadf-8a7abce3deeb",
+            "sourceColumn": "Nome da Origem",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Pedido",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "7a13c8aa-1b97-401e-8619-c3664bed3631",
+            "sourceColumn": "Pedido",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Cliente",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "2806d678-28cd-4507-aded-63bb39ddda11",
+            "sourceColumn": "Cliente",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Data Venda",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "38bf6844-5242-48d6-a96e-f2eba3916ffd",
+            "sourceColumn": "Data Venda",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Forma de Pagto",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "88bff7d4-ae1b-4502-b351-918da3277a1b",
+            "sourceColumn": "Forma de Pagto",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "UF",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "bded351c-acd7-4120-8aad-44b8e4e298cb",
+            "sourceColumn": "UF",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Loja",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "3e796da1-e8ba-4790-ba50-88bb5abf0705",
+            "sourceColumn": "Loja",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Vendedor",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "474f9b2f-4c3f-44a1-a566-2e67a970c0d7",
+            "sourceColumn": "Vendedor",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "02e17199-1e99-4d03-91fc-a32857e549d9",
+        "partitions": [
+          {
+            "name": "f_Pedidos",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Fonte = Folder.Files(\"D:\\Github projetos\\Power Bi Aula Ka Solution\\Dados\\Vendas\"),",
+                "    #\"Arquivos Ocultos Filtrados1\" = Table.SelectRows(Fonte, each [Attributes]?[Hidden]? <> true),",
+                "    #\"Invocar Função Personalizada1\" = Table.AddColumn(#\"Arquivos Ocultos Filtrados1\", \"Transformar Arquivo (2)\", each #\"Transformar Arquivo (2)\"([Content])),",
+                "    #\"Colunas Renomeadas1\" = Table.RenameColumns(#\"Invocar Função Personalizada1\", {\"Name\", \"Nome da Origem\"}),",
+                "    #\"Outras Colunas Removidas1\" = Table.SelectColumns(#\"Colunas Renomeadas1\", {\"Nome da Origem\", \"Transformar Arquivo (2)\"}),",
+                "    #\"Coluna de Tabela Expandida1\" = Table.ExpandTableColumn(#\"Outras Colunas Removidas1\", \"Transformar Arquivo (2)\", Table.ColumnNames(#\"Transformar Arquivo (2)\"(#\"Arquivo de Amostra (2)\"))),",
+                "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Coluna de Tabela Expandida1\",{{\"Nome da Origem\", type text}, {\"Pedido\", Int64.Type}, {\"Cliente\", Int64.Type}, {\"Data Venda\", type date}, {\"Forma de Pagto\", Int64.Type}, {\"UF\", Int64.Type}, {\"Loja\", Int64.Type}, {\"Vendedor\", Int64.Type}}),",
+                "    #\"Linhas Filtradas\" = Table.SelectRows(#\"Tipo Alterado\", each ([Nome da Origem] <> \"Layout.xlsx\"))",
+                "in",
+                "    #\"Linhas Filtradas\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "DateTableTemplate_a4c16544-7667-4cbb-845c-7e6b7fd40df5",
+        "annotations": [
+          {
+            "name": "__PBI_TemplateDateTable",
+            "value": "true"
+          },
+          {
+            "name": "DefaultItem",
+            "value": "DateHierarchy"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataCategory": "PaddedDateTableDates",
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "d4c8bfb6-14e2-4cba-a870-78402713af64",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Ano",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ],
+            "dataCategory": "Years",
+            "dataType": "int64",
+            "expression": "YEAR([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "25089385-5d97-4fd2-aeab-acd8236dee09",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "MonthNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ],
+            "dataCategory": "MonthOfYear",
+            "dataType": "int64",
+            "expression": "MONTH([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "4953885c-724b-49a8-a85e-efd649efb791",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Mês",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ],
+            "dataCategory": "Months",
+            "dataType": "string",
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "isHidden": true,
+            "lineageTag": "1837c852-59b8-48eb-99aa-846500c24d2a",
+            "sortByColumn": "MonthNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "QuarterNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ],
+            "dataCategory": "QuarterOfYear",
+            "dataType": "int64",
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "bcfcd87e-8bdd-42d2-a2cd-0dca479917a6",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Trimestre",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ],
+            "dataCategory": "Quarters",
+            "dataType": "string",
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "isHidden": true,
+            "lineageTag": "e55dabc1-c832-48a4-b3d2-b2b98e79e042",
+            "sortByColumn": "QuarterNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Dia",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ],
+            "dataCategory": "DayOfMonth",
+            "dataType": "int64",
+            "expression": "DAY([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "069300e2-a88b-4714-ba52-3e19c8ec5ac7",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Hierarquia de datas",
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ],
+            "levels": [
+              {
+                "name": "Ano",
+                "column": "Ano",
+                "lineageTag": "dc1d375e-d97e-420a-bfb2-ef0bfb4e8c1a",
+                "ordinal": 0
+              },
+              {
+                "name": "Trimestre",
+                "column": "Trimestre",
+                "lineageTag": "f1465c54-8e35-456e-84f5-5486e2be6c8f",
+                "ordinal": 1
+              },
+              {
+                "name": "Mês",
+                "column": "Mês",
+                "lineageTag": "9cb8ada5-c6dd-40e0-a10f-209d9db2e36c",
+                "ordinal": 2
+              },
+              {
+                "name": "Dia",
+                "column": "Dia",
+                "lineageTag": "efcb9d9a-2513-4dcf-881b-d772dfdd3a13",
+                "ordinal": 3
+              }
+            ],
+            "lineageTag": "59ce84de-054f-4170-9c6b-83a51aeaf4c2"
+          }
+        ],
+        "isHidden": true,
+        "isPrivate": true,
+        "lineageTag": "b58a1c2c-eb20-45ac-914a-ac584822b0a4",
+        "partitions": [
+          {
+            "name": "DateTableTemplate_a4c16544-7667-4cbb-845c-7e6b7fd40df5",
+            "mode": "import",
+            "source": {
+              "expression": "Calendar(Date(2015,1,1), Date(2015,1,1))",
+              "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "d_Clientes",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navegação"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Código",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "2de2b08c-371c-4abf-9b00-83c213f6f68d",
+            "sourceColumn": "Código",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Cliente",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "e8072a8d-b86f-4542-beaa-15566ef35789",
+            "sourceColumn": "Cliente",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PJ ou PF",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "253acbda-a8c3-4230-840c-1351b7585387",
+            "sourceColumn": "PJ ou PF",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Data Nascimento",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "7728e8ab-4f9e-46a5-98b4-97595588df8e",
+            "sourceColumn": "Data Nascimento",
+            "summarizeBy": "none",
+            "variations": [
+              {
+                "name": "Variation",
+                "defaultHierarchy": {
+                  "hierarchy": "Hierarquia de datas",
+                  "table": "LocalDateTable_bae51644-78ce-48f6-b705-9247f6ca9c14"
+                },
+                "isDefault": true,
+                "relationship": "1c72025e-073f-4bbf-84f1-bdc51e5f4f58"
+              }
+            ]
+          }
+        ],
+        "lineageTag": "1b118c32-8dfe-4856-9988-053cf1683fac",
+        "partitions": [
+          {
+            "name": "d_Clientes",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Fonte = Excel.Workbook(File.Contents(\"D:\\Github projetos\\Power Bi Aula Ka Solution\\Dados\\_Base.xlsx\"), null, true),",
+                "    Clientes_Sheet = Fonte{[Item=\"Clientes\",Kind=\"Sheet\"]}[Data],",
+                "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Clientes_Sheet, [PromoteAllScalars=true]),",
+                "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"Código\", Int64.Type}, {\"Cliente\", type text}, {\"PJ ou PF\", type text}, {\"Data Nascimento\", type date}})",
+                "in",
+                "    #\"Tipo Alterado\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "LocalDateTable_bae51644-78ce-48f6-b705-9247f6ca9c14",
+        "annotations": [
+          {
+            "name": "__PBI_LocalDateTable",
+            "value": "true"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataCategory": "PaddedDateTableDates",
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "d536b98d-5853-47ac-b51e-6748a48ef113",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Ano",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ],
+            "dataCategory": "Years",
+            "dataType": "int64",
+            "expression": "YEAR([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "586d155b-2b05-4dcf-b050-7c33d7c36ab2",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "MonthNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ],
+            "dataCategory": "MonthOfYear",
+            "dataType": "int64",
+            "expression": "MONTH([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "a14de232-da9e-49a7-807d-e0ad74c8a5f3",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Mês",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ],
+            "dataCategory": "Months",
+            "dataType": "string",
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "isHidden": true,
+            "lineageTag": "65eeb83a-7bfa-4fcf-beb8-bef85f44b13a",
+            "sortByColumn": "MonthNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "QuarterNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ],
+            "dataCategory": "QuarterOfYear",
+            "dataType": "int64",
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "52a6cc67-692d-492a-b206-5c056a55e833",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Trimestre",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ],
+            "dataCategory": "Quarters",
+            "dataType": "string",
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "isHidden": true,
+            "lineageTag": "1fcd3817-7aa9-41c9-ba57-23d2ccdb0671",
+            "sortByColumn": "QuarterNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Dia",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ],
+            "dataCategory": "DayOfMonth",
+            "dataType": "int64",
+            "expression": "DAY([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "3ff8d1cb-423d-4121-9cbe-0631457992dc",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Hierarquia de datas",
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ],
+            "levels": [
+              {
+                "name": "Ano",
+                "column": "Ano",
+                "lineageTag": "0dda9262-a9a6-4905-8e7b-684e5042d269",
+                "ordinal": 0
+              },
+              {
+                "name": "Trimestre",
+                "column": "Trimestre",
+                "lineageTag": "b1e6b829-5b93-4840-81df-958548bf1804",
+                "ordinal": 1
+              },
+              {
+                "name": "Mês",
+                "column": "Mês",
+                "lineageTag": "8e1ca35d-f70d-4d9f-b996-67c21ca556aa",
+                "ordinal": 2
+              },
+              {
+                "name": "Dia",
+                "column": "Dia",
+                "lineageTag": "aaf439c8-f0c4-4d64-9447-9fba1468dc19",
+                "ordinal": 3
+              }
+            ],
+            "lineageTag": "22413bec-1cb8-491a-b821-15de08c0e038"
+          }
+        ],
+        "isHidden": true,
+        "lineageTag": "1ad03385-b6dd-4fad-925b-9366eee42717",
+        "partitions": [
+          {
+            "name": "LocalDateTable_bae51644-78ce-48f6-b705-9247f6ca9c14",
+            "mode": "import",
+            "source": {
+              "expression": "Calendar(Date(Year(MIN('d_Clientes'[Data Nascimento])), 1, 1), Date(Year(MAX('d_Clientes'[Data Nascimento])), 12, 31))",
+              "type": "calculated"
+            }
+          }
+        ],
+        "showAsVariationsOnly": true
+      },
+      {
+        "name": "d_Estados",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navegação"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Código",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "042bbde2-545d-46b2-9097-6392b156f519",
+            "sourceColumn": "Código",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Estado",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "cd52ac87-a5c7-424f-815d-798de9ae8579",
+            "sourceColumn": "Estado",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Sigla",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "62e36342-2544-4c1e-81cc-a9c9cada0778",
+            "sourceColumn": "Sigla",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "a8e58138-e936-4f8a-bfec-1b0d0416f4ee",
+        "partitions": [
+          {
+            "name": "d_Estados",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Fonte = Excel.Workbook(File.Contents(\"D:\\Github projetos\\Power Bi Aula Ka Solution\\Dados\\_Base.xlsx\"), null, true),",
+                "    Estados_Sheet = Fonte{[Item=\"Estados\",Kind=\"Sheet\"]}[Data],",
+                "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Estados_Sheet, [PromoteAllScalars=true]),",
+                "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"Código\", Int64.Type}, {\"Estado\", type text}, {\"Sigla\", type text}})",
+                "in",
+                "    #\"Tipo Alterado\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "d_Formas de Pagamento",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navegação"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Código",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "239590bb-d8fa-4256-9b0e-5d04023a64c7",
+            "sourceColumn": "Código",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Forma",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "ae55dc0a-6f97-4d2f-b7ff-b841bf0bf20c",
+            "sourceColumn": "Forma",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "2270822f-fd24-4925-9039-31de7ba24be8",
+        "partitions": [
+          {
+            "name": "d_Formas de Pagamento",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Fonte = Excel.Workbook(File.Contents(\"D:\\Github projetos\\Power Bi Aula Ka Solution\\Dados\\_Base.xlsx\"), null, true),",
+                "    #\"Formas de Pagamento_Sheet\" = Fonte{[Item=\"Formas de Pagamento\",Kind=\"Sheet\"]}[Data],",
+                "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(#\"Formas de Pagamento_Sheet\", [PromoteAllScalars=true]),",
+                "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"Código\", Int64.Type}, {\"Forma\", type text}})",
+                "in",
+                "    #\"Tipo Alterado\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "d_Lojas",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navegação"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Código",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "e9358671-e783-43ea-a0a0-5bc754de8379",
+            "sourceColumn": "Código",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Nome",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "c32017e0-c131-45f2-b600-63d74b2c8616",
+            "sourceColumn": "Nome",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "346d7cf8-1927-4327-a678-6f2972b62208",
+        "partitions": [
+          {
+            "name": "d_Lojas",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Fonte = Excel.Workbook(File.Contents(\"D:\\Github projetos\\Power Bi Aula Ka Solution\\Dados\\_Base.xlsx\"), null, true),",
+                "    Lojas_Sheet = Fonte{[Item=\"Lojas\",Kind=\"Sheet\"]}[Data],",
+                "    #\"Cabeçalhos Promovidos\" = Table.PromoteHeaders(Lojas_Sheet, [PromoteAllScalars=true]),",
+                "    #\"Tipo Alterado\" = Table.TransformColumnTypes(#\"Cabeçalhos Promovidos\",{{\"Código\", Int64.Type}, {\"Nome\", type text}})",
+                "in",
+                "    #\"Tipo Alterado\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "_Medidas",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "lineageTag": "4b7048e6-2e4c-424c-a4aa-113f5c5be61b",
+        "measures": [
+          {
+            "name": "Total-Realizado",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": "SUMX(f_Itens_Pedidos,f_Itens_Pedidos[Preço Venda]*f_Itens_Pedidos[Qtde.])",
+            "lineageTag": "c037f7e7-2e11-42e8-9887-b0ddbb860b8a"
+          },
+          {
+            "name": "Total-Previsto",
+            "expression": "SUMX(f_Itens_Pedidos,f_Itens_Pedidos[Qtde.]*RELATED(d_Produtos[Preço base]))",
+            "formatString": "0",
+            "lineageTag": "557db3bd-efe8-41e0-b13b-0ef3be58d5d6"
+          },
+          {
+            "name": "Total-Realizado-Ano-Anterior",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": "CALCULATE([Total-Realizado],SAMEPERIODLASTYEAR(d_calendario[Date]))",
+            "lineageTag": "2138c606-2171-437a-9e88-0a0f60175ef1"
+          },
+          {
+            "name": "Cor-Ano",
+            "expression": "IF([Total-Realizado]<[Total-Realizado-Ano-Anterior],\"#FF1010\",\"#118DFF\")",
+            "lineageTag": "e2154e0e-4f18-4b26-9455-268bcf11d8f7"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "_Medidas",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"i44FAA==\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#\"Coluna 1\" = _t]),",
+                "    #\"Tipo Alterado\" = Table.TransformColumnTypes(Fonte,{{\"Coluna 1\", type text}}),",
+                "    #\"Colunas Removidas\" = Table.RemoveColumns(#\"Tipo Alterado\",{\"Coluna 1\"})",
+                "in",
+                "    #\"Colunas Removidas\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "d_calendario",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "39aa8f75c56d499891a4085fe12c026d"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "isDataTypeInferred": true,
+            "isNameInferred": true,
+            "lineageTag": "d47d505f-377e-4bd4-9342-7dbd110434f6",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn",
+            "variations": [
+              {
+                "name": "Variation",
+                "defaultHierarchy": {
+                  "hierarchy": "Hierarquia de datas",
+                  "table": "LocalDateTable_6a8ecd74-b451-4e87-9e72-a1982da4a28f"
+                },
+                "isDefault": true,
+                "relationship": "4544cf22-62f2-4a10-9126-c802c41e4d1a"
+              }
+            ]
+          }
+        ],
+        "lineageTag": "2f0a5c45-9cb3-448a-86b1-fbe2ee81e8e6",
+        "partitions": [
+          {
+            "name": "d_calendario",
+            "mode": "import",
+            "source": {
+              "expression": "CALENDAR(MIN(f_Pedidos[Data Venda]),MAX(f_Pedidos[Data Venda]))",
+              "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "LocalDateTable_6a8ecd74-b451-4e87-9e72-a1982da4a28f",
+        "annotations": [
+          {
+            "name": "__PBI_LocalDateTable",
+            "value": "true"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataCategory": "PaddedDateTableDates",
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "af9014b3-f447-4cbe-ad02-d08866c376c1",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Ano",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ],
+            "dataCategory": "Years",
+            "dataType": "int64",
+            "expression": "YEAR([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "eea962c3-07b9-4144-ab10-1df3c03f6609",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "MonthNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ],
+            "dataCategory": "MonthOfYear",
+            "dataType": "int64",
+            "expression": "MONTH([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "ce42e2c0-10bd-4570-8b46-075396e8faed",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Mês",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ],
+            "dataCategory": "Months",
+            "dataType": "string",
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "isHidden": true,
+            "lineageTag": "78d04504-eee4-4334-a167-a794b1d9d1f6",
+            "sortByColumn": "MonthNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "QuarterNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ],
+            "dataCategory": "QuarterOfYear",
+            "dataType": "int64",
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "5105efe0-d729-4fbf-bf2d-c493d8b82e03",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Trimestre",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ],
+            "dataCategory": "Quarters",
+            "dataType": "string",
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "isHidden": true,
+            "lineageTag": "474c3442-624d-4627-9896-6cf4424af523",
+            "sortByColumn": "QuarterNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Dia",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ],
+            "dataCategory": "DayOfMonth",
+            "dataType": "int64",
+            "expression": "DAY([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "e7a2f0ef-d355-4624-a29c-b6f4bab4ccdc",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Hierarquia de datas",
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ],
+            "levels": [
+              {
+                "name": "Ano",
+                "column": "Ano",
+                "lineageTag": "833b80ce-4808-4421-8747-ac1b5a60fb08",
+                "ordinal": 0
+              },
+              {
+                "name": "Trimestre",
+                "column": "Trimestre",
+                "lineageTag": "8bc09e79-578b-4838-a483-1a3b5c429a78",
+                "ordinal": 1
+              },
+              {
+                "name": "Mês",
+                "column": "Mês",
+                "lineageTag": "aa05d40d-6d22-470b-bc04-a2512d305420",
+                "ordinal": 2
+              },
+              {
+                "name": "Dia",
+                "column": "Dia",
+                "lineageTag": "490ffee8-b161-46b2-9f7c-309e12f86e3d",
+                "ordinal": 3
+              }
+            ],
+            "lineageTag": "c868cd76-fed2-45c6-93f4-6e1abf16dad0"
+          }
+        ],
+        "isHidden": true,
+        "lineageTag": "9a788d58-940a-4982-a0ef-76e7a1d3f3d4",
+        "partitions": [
+          {
+            "name": "LocalDateTable_6a8ecd74-b451-4e87-9e72-a1982da4a28f",
+            "mode": "import",
+            "source": {
+              "expression": "Calendar(Date(Year(MIN('d_calendario'[Date])), 1, 1), Date(Year(MAX('d_calendario'[Date])), 12, 31))",
+              "type": "calculated"
+            }
+          }
+        ],
+        "showAsVariationsOnly": true
+      }
+    ]
+  }
+}
